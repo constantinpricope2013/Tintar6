@@ -14,6 +14,21 @@ namespace Tintar6
 {
     public partial class Client : Form
     {
+        int w = 800, h = 800;
+        private int[] firstPlayerPosition = new int[] { 20, 200,
+                                                        50, 200,
+                                                        80, 200,
+                                                        20, 230,
+                                                        50, 230,
+                                                        80, 230,
+                                                        };
+        private int[] secondPlayerPosition = new int[] { 520, 200,
+                                                         550, 200,
+                                                         580, 200,
+                                                         520, 230,
+                                                         550, 230,
+                                                         580, 230,
+                                                         };
         private String clientStatusText = "";
         public Client()
         {
@@ -26,10 +41,44 @@ namespace Tintar6
 
         private void Client_Load(object sender, EventArgs e)
         {
+            this.Invalidate();
+
+        }
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+
+            int width = 30;
+            w = this.ClientSize.Width;
+            h = this.ClientSize.Height;
+            SolidBrush greenBrush = new SolidBrush(Color.Green);
+            SolidBrush blueBrush = new SolidBrush(Color.Blue);
+
+
+            g.DrawRectangle(Pens.Red, (w / 2) - 20, h / 2, 140, 120);
+            g.DrawRectangle(Pens.Red, w / 2, (h / 2) + 20, 100, 80);
+            
+            
+            //First Player
+            g.FillEllipse(greenBrush, firstPlayerPosition[0], firstPlayerPosition[1], 20, 20);
+            g.FillEllipse(greenBrush, firstPlayerPosition[2], firstPlayerPosition[3], 20, 20);
+            g.FillEllipse(greenBrush, firstPlayerPosition[4], firstPlayerPosition[5], 20, 20);
+            g.FillEllipse(greenBrush, firstPlayerPosition[6], firstPlayerPosition[7], 20, 20);
+            g.FillEllipse(greenBrush, firstPlayerPosition[8], firstPlayerPosition[9], 20, 20);
+            g.FillEllipse(greenBrush, firstPlayerPosition[10], firstPlayerPosition[11], 20, 20);
+
+            //SecondPlayer
+            g.FillEllipse(blueBrush, secondPlayerPosition[0], secondPlayerPosition[1], 20, 20);
+            g.FillEllipse(blueBrush, secondPlayerPosition[2], secondPlayerPosition[3], 20, 20);
+            g.FillEllipse(blueBrush, secondPlayerPosition[4], secondPlayerPosition[5], 20, 20);
+            g.FillEllipse(blueBrush, secondPlayerPosition[6], secondPlayerPosition[7], 20, 20);
+            g.FillEllipse(blueBrush, secondPlayerPosition[8], secondPlayerPosition[9], 20, 20);
+            g.FillEllipse(blueBrush, secondPlayerPosition[10], secondPlayerPosition[11], 20, 20);
+
 
         }
 
-        public void setClientStatusText(String stringInput)
+            public void setClientStatusText(String stringInput)
         {
             clientStatusText += stringInput + "\n";
             clientStatus.Text = clientStatusText;
@@ -47,8 +96,8 @@ namespace Tintar6
         {
             clientFrame = clientFrameParam;
             ConnectToServer();
-            RequestLoop();
-            Exit();
+           // RequestLoop();
+            //Exit();
 
         }
 
@@ -69,6 +118,7 @@ namespace Tintar6
                 catch (SocketException)
                 {
                     //Console.Clear();
+                    clientFrame.setClientStatusText("Socket exception catched");
                     return;
                 }
             }

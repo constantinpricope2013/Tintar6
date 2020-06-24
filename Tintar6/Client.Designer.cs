@@ -67,9 +67,10 @@
             // 
             // clientStatus
             // 
-            this.clientStatus.Location = new System.Drawing.Point(260, 116);
+            this.clientStatus.Location = new System.Drawing.Point(260, 99);
             this.clientStatus.Multiline = true;
             this.clientStatus.Name = "clientStatus";
+            this.clientStatus.ReadOnly = true;
             this.clientStatus.Size = new System.Drawing.Size(449, 103);
             this.clientStatus.TabIndex = 4;
             // 
